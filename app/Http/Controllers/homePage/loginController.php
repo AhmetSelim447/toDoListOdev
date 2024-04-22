@@ -5,6 +5,7 @@ namespace App\Http\Controllers\homePage;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class loginController extends Controller
@@ -38,28 +39,16 @@ class loginController extends Controller
      */
     public function store(Request $request)
     {
-
-        $veri = User::query()->get()->all();
-
-        $password = $request->password;
-        $hashedPassword = Hash::make($password);
-
-
-
-        foreach($veri as $data) {
-
-            if (($request->email == $data->email) or ($hashedPassword == $data->password)) {
-
-                return view("todoListPageDirectory.todoList");
-
-            }
-
+        // Kullanıcı giriş yapmışsa
+        if(Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+            // Kullanıcı başarılı bir şekilde giriş yaptıysa
+            return view("todoListPageDirectory.todoList");
+        } else {
+            // Kullanıcı giriş yapamadıysa, hata mesajı gösterebilirsiniz veya giriş sayfasına geri yönlendirebilirsiniz.
+            return view("loginPanel.login")->with('error', 'Kullanıcı adı veya şifre hatalı');
         }
-
-
-        return view("loginPanel.login");
-
     }
+
 
     /**
      * Display the specified resource.

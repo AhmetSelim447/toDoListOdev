@@ -19,6 +19,9 @@ Route::prefix("task")->group(function (){
 
     Route::get("taskGet",[\App\Http\Controllers\tasksDirectory\taskController::class,"taskPage"])->name("task.taskGet");
     Route::post('taskPost',[\App\Http\Controllers\tasksDirectory\taskController::class,"store"])->name("task.taskPost");
+    Route::get("todoList",[\App\Http\Controllers\tasksDirectory\taskController::class,"todoList"])->name("task.todoList");
+    Route::get("remove/{id}",[\App\Http\Controllers\tasksDirectory\taskController::class,"destroy"])->name("task.remove");
+
 
 
 });

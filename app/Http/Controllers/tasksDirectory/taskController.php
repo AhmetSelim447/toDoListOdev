@@ -3,16 +3,21 @@
 namespace App\Http\Controllers\tasksDirectory;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\Task;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use function Illuminate\Events\queueable;
 
 class taskController extends Controller
 {
 
     public function taskPage()
     {
-        return view("defineTheTasksDirectory.defineTheTask");
+        $categories = Category::query()->get();
+
+        return view("defineTheTasksDirectory.defineTheTask",compact("categories"));
 
     }
 
@@ -22,6 +27,12 @@ class taskController extends Controller
     public function index()
     {
         //
+    }
+
+    public function todoList()
+    {
+        return view("todoListPageDirectory.todoList");
+
     }
 
     /**
@@ -35,21 +46,47 @@ class taskController extends Controller
     /**
      * Store a newly created resource in storage.
      */
+//    public function store(Request $request)
+//    {
+//
+//        $data  = new Task();
+//
+//        $data->user_id = Auth::user()->id;
+//        $data->title = $request->title;
+//        $data->content = $request->contentt;
+//        $data->status = $request->status;
+//        $data->deadline = $request->deadline;
+//        $data->cat_id = $request->value;
+//
+//        $data->save();
+//
+//        return view("todoListPageDirectory.todoList");
+//
+//    }
     public function store(Request $request)
     {
-        $data  = new Task;
+        // Kullanıcı oturum açmışsa
+        if(Auth::check()) {
+            $data  = new Task();
 
+            dd($request->select);
 
-        $data->title = $request->title;
-        $data->content = $request->contentt;
-        $data->status = $request->status;
-        $data->deadline = $request->deadline;
+            $data->user_id = Auth::user()->id; // Auth::user()->id olarak değiştirildi
+            $data->title = $request->title;
+            $data->content = $request->contentt;
+            $data->status = $request->status;
+            $data->deadline = $request->deadline;
+            $data->cat_id = $request;
 
-        $data->save();
+            $data->save();
 
-        return view("todoListPageDirectory.todoList",compact("data"));
-
+            return view("todoListPageDirectory.todoList");
+        } else {
+            // Kullanıcı oturum açmamışsa, isteği reddedin veya giriş sayfasına yönlendirin
+            return redirect()->route('task.todoList'); // Örnek olarak giriş sayfasına yönlendirme
+        }
     }
+
 
     /**
      * Display the specified resource.
@@ -72,7 +109,7 @@ class taskController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+
     }
 
     /**
@@ -80,6 +117,10 @@ class taskController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $data = Task::query()->find($id);
+        $data->delete();
+
+        return redirect()->back();
+
     }
 }

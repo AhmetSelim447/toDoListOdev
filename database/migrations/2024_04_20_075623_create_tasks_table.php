@@ -12,6 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('tasks', function (Blueprint $table) {
+
             $table->id();
             $table->unsignedBigInteger("user_id");
             $table->string("title")->nullable();
@@ -19,10 +20,11 @@ return new class extends Migration
             $table->tinyInteger("status")->default(0)->comment("Taskın güncel durumunu belirten alan 0 yapılmadı 1 yapılıyor 2-ertelendi 3-iptal oldu");
             $table->dateTime('deadline')->nullable();
             $table->unsignedBigInteger("cat_id");
-            $table->timestamps();
-            $table->softDeletes();
             $table->foreign("user_id")->on("users")->references("id");
             $table->foreign("cat_id")->on("categories")->references("id");
+            $table->timestamps();
+            $table->softDeletes();
+
         });
     }
 

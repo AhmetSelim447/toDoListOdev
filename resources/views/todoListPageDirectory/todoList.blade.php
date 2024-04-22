@@ -90,16 +90,26 @@
                     <th>Status</th>
                     <th>Deadline</th>
                     <th>Remove</th>
-                    <th>Update</th>
+
 
                 </tr>
 
             </thead>
 
-
-
             <tbody>
 
+{{--                <tr>--}}
+
+{{--                    @foreach($data as $datum)--}}
+
+{{--                        <td>$datum</td>--}}
+
+{{--                    @endforeach--}}
+
+{{--                        <td><a href="{{route("task.remove",$data->id)}}">Sil</a></td>--}}
+
+
+{{--                </tr>--}}
 
 
             </tbody>

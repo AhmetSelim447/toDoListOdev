@@ -115,6 +115,19 @@
 
             </div>
 
+            <div class="category">
+
+                <select class="form-control" name = "select">
+
+                    @foreach($categories as $category )
+
+                        <option value="{{$category->id}}" >{{$category->name}}</option>
+
+                    @endforeach
+
+                </select>
+
+            </div>
 
             <div class="button">
 
@@ -123,6 +136,13 @@
             </div>
 
         </form>
+
+        <div class="btn btn-success w-100 d-flex justify-content-center align-items-center">
+
+            <a class="text-white" href="{{route("task.todoList")}}">Liste</a>
+
+        </div>
+
 
     </div>
 
