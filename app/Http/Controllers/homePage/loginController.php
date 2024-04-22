@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\homePage;
 
 use App\Http\Controllers\Controller;
+use App\Models\Task;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -21,6 +22,8 @@ class loginController extends Controller
     /**
      * Display a listing of the resource.
      */
+
+
     public function index()
     {
         //
@@ -42,7 +45,9 @@ class loginController extends Controller
         // Kullanıcı giriş yapmışsa
         if(Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
             // Kullanıcı başarılı bir şekilde giriş yaptıysa
-            return view("todoListPageDirectory.todoList");
+
+            $data = Task::orderBy('id')->get();
+            return view("todoListPageDirectory.todoList",compact('data'));
         } else {
             // Kullanıcı giriş yapamadıysa, hata mesajı gösterebilirsiniz veya giriş sayfasına geri yönlendirebilirsiniz.
             return view("loginPanel.login")->with('error', 'Kullanıcı adı veya şifre hatalı');

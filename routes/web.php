@@ -22,6 +22,4 @@ Route::prefix("task")->group(function (){
     Route::get("todoList",[\App\Http\Controllers\tasksDirectory\taskController::class,"todoList"])->name("task.todoList");
     Route::get("remove/{id}",[\App\Http\Controllers\tasksDirectory\taskController::class,"destroy"])->name("task.remove");
 
-
-
 });

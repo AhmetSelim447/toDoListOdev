@@ -7,6 +7,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+
     <style>
 
 
@@ -30,6 +33,7 @@
         .todoList{
 
             border: 3px solid #CB6363;
+            width: 1200px;
 
         }
 
@@ -67,61 +71,69 @@
 </head>
 <body>
 
-<div class="addTask">
-
-    <a href="{{route("task.taskGet")}}">Görev Ekle</a>
-
-</div>
 
 
-
-<div class="container outside">
-
-    <div class="todoList">
-
-        <table class="table">
-
-            <thead>
-
-                <tr>
-
-                    <th>Title</th>
-                    <th>Content</th>
-                    <th>Status</th>
-                    <th>Deadline</th>
-                    <th>Remove</th>
+    <div class="d-flex justify-content-center align-items-center">
 
 
-                </tr>
+        <div class="addTask w-20">
 
-            </thead>
+            <a href="{{route("task.taskGet")}}">Görev Ekle</a>
 
-            <tbody>
-
-{{--                <tr>--}}
-
-{{--                    @foreach($data as $datum)--}}
-
-{{--                        <td>$datum</td>--}}
-
-{{--                    @endforeach--}}
-
-{{--                        <td><a href="{{route("task.remove",$data->id)}}">Sil</a></td>--}}
+        </div>
 
 
-{{--                </tr>--}}
+        <div class="container outside w-70 pt-lg-5">
 
 
-            </tbody>
+            <div class="todoList">
+
+                <table class="table w-100">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Title</th>
+                            <th>Content</th>
+                            <th>Status</th>
+                            <th>Deadline</th>
+                            <th>Remove</th>
 
 
-        </table>
+                        </tr>
 
+                    </thead>
+
+                    <tbody>
+
+
+
+                                @foreach($data as $datum)
+
+                                    <tr>
+                                        <td>{{$datum->title}}</td>
+                                        <td>{{$datum->content}}</td>
+                                        <td>{{$datum->status}}</td>
+                                        <td>{{$datum->deadline}}</td>
+                                        <td><a class="btn btn-success" href="{{route("task.remove",$datum->id)}}">Sil</a></td>
+                                    </tr>
+
+                                @endforeach
+
+
+
+
+                    </tbody>
+
+
+                </table>
+
+            </div>
+        </div>
 
     </div>
-
-
-</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
 
 </body>

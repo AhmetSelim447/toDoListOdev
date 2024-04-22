@@ -26,12 +26,14 @@ class taskController extends Controller
      */
     public function index()
     {
-        //
+        return view("todoListPageDirectory.todoList");
+
     }
 
     public function todoList()
     {
-        return view("todoListPageDirectory.todoList");
+        $data = Task::orderBy('id')->get();
+        return view("todoListPageDirectory.todoList",compact("data"));
 
     }
 
@@ -40,6 +42,8 @@ class taskController extends Controller
      */
     public function create()
     {
+
+
 
     }
 
@@ -69,18 +73,17 @@ class taskController extends Controller
         if(Auth::check()) {
             $data  = new Task();
 
-            dd($request->select);
-
             $data->user_id = Auth::user()->id; // Auth::user()->id olarak değiştirildi
             $data->title = $request->title;
             $data->content = $request->contentt;
             $data->status = $request->status;
             $data->deadline = $request->deadline;
-            $data->cat_id = $request;
+            $data->cat_id =$request->select;
 
             $data->save();
 
-            return view("todoListPageDirectory.todoList");
+            return redirect()->route("task.todoList");
+
         } else {
             // Kullanıcı oturum açmamışsa, isteği reddedin veya giriş sayfasına yönlendirin
             return redirect()->route('task.todoList'); // Örnek olarak giriş sayfasına yönlendirme
@@ -93,7 +96,7 @@ class taskController extends Controller
      */
     public function show(string $id)
     {
-        //
+
     }
 
     /**
@@ -118,9 +121,16 @@ class taskController extends Controller
     public function destroy(string $id)
     {
         $data = Task::query()->find($id);
-        $data->delete();
 
-        return redirect()->back();
+        if(isset($data)){
+
+            $data->delete();
+
+        }
+
+        return redirect()->route("task.todoList");
+
+//        return view("todoListPageDirectory.todoList");
 
     }
 }

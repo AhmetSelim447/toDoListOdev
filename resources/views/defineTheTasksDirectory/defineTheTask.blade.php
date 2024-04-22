@@ -105,7 +105,7 @@
 
             <div class="status">
 
-                <input type="number" name="status" class="form-control" min="0" max="3">
+                <input type="number" name="status" class="form-control" placeholder="Lütfen öncelik belirtin" min="0" max="3">
 
             </div>
 
