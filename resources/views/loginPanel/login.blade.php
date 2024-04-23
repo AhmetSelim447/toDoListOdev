@@ -77,15 +77,37 @@
 
         }
 
+        .errors{
 
+            background-color: #7fe0f6;
+            padding: 30px;
+            color: #a626a4;
+            font-size:17px;
+            font-weight: bold;
+
+        }
 
     </style>
 
 </head>
 
-
 <body>
+    @if(isset($error))
 
+            <div class="container pt-lg-5">
+
+                <div class="errors">
+
+                        <ul>
+
+                            <li>{{$error}}</li>
+
+                        </ul>
+
+                </div>
+
+            </div>
+   @endif
     <div class="container outside">
 
         <div class="loginn">
@@ -114,9 +136,7 @@
 
             </form>
 
-
         </div>
-
 
     </div>
 

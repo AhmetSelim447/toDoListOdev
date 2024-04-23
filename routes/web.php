@@ -9,6 +9,7 @@ Route::get('/', function () {
 Route::prefix("home")->group(function (){
 
     Route::get("login",[\App\Http\Controllers\homePage\loginController::class,"loginPage"])->name("home.login");
+    Route::get("/logout",[\App\Http\Controllers\homePage\loginController::class,"logout"])->name("home.logout");
     Route::post("loginPost",[\App\Http\Controllers\homePage\loginController::class,"store"])->name("home.loginPost");
     Route::get("register",[\App\Http\Controllers\homePage\registerController::class,"registerPage"])->name("home.register");
     Route::post("registerPost",[\App\Http\Controllers\homePage\registerController::class,"store"])->name("home.registerPost");

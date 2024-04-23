@@ -92,6 +92,9 @@
 </head>
 <body>
 
+@include("panel.layout.navbarLogout")
+
+
     @if($errors->any())
 
         <div class="errors container">
