@@ -78,10 +78,38 @@
 
         }
 
+        .errors{
+
+            background-color: indianred;
+            color: white;
+            margin-top:10px;
+            padding: 15px;
+
+        }
+
     </style>
 
 </head>
 <body>
+
+    @if($errors->any())
+
+        <div class="errors container">
+
+            <ul>
+
+                @foreach($errors->all() as $error)
+
+                    <li>{{$error}}</li>
+
+                @endforeach
+
+            </ul>
+
+        </div>
+
+    @endif
+
 
 <div class="container outside">
 

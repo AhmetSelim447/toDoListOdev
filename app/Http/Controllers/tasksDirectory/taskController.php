@@ -74,9 +74,6 @@ class taskController extends Controller
      */
     public function create()
     {
-
-
-
     }
 
     /**
@@ -101,6 +98,10 @@ class taskController extends Controller
 //    }
     public function store(Request $request)
     {
+        $request->validate([
+            "content"=>"required|min:12|max:200",
+        ]);
+
         // Kullanıcı oturum açmışsa
         if(Auth::check()) {
             $data  = new Task();
@@ -121,16 +122,12 @@ class taskController extends Controller
             return redirect()->route('task.todoList'); // Örnek olarak giriş sayfasına yönlendirme
         }
     }
-
-
     /**
      * Display the specified resource.
      */
     public function show(string $id)
     {
-
     }
-
     /**
      * Show the form for editing the specified resource.
      */
@@ -138,7 +135,6 @@ class taskController extends Controller
     {
         //
     }
-
     /**
      * Update the specified resource in storage.
      */
@@ -146,7 +142,6 @@ class taskController extends Controller
     {
 
     }
-
     /**
      * Remove the specified resource from storage.
      */
@@ -159,9 +154,7 @@ class taskController extends Controller
             $data->delete();
 
         }
-
         return redirect()->route("task.todoList");
-
 //        return view("todoListPageDirectory.todoList");
 
     }
