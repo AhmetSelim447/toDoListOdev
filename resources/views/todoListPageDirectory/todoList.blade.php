@@ -15,6 +15,7 @@
 
         body{
 
+            background-color: #7fe0f6;
             padding: 0px;
             margin: 0px;
 
@@ -35,6 +36,13 @@
             border: 3px solid #CB6363;
             width: 1200px;
 
+
+        }
+
+        table{
+
+            border-radius: 30px !important;
+
         }
 
         .addTask{
@@ -46,6 +54,7 @@
             padding: 20px;
             background-color: hotpink;
             margin:30px 60px;
+            border-radius: 30px;
 
         }
 
@@ -70,6 +79,8 @@
 
 </head>
 <body>
+
+
 
 
 
@@ -109,7 +120,7 @@
 
 
 
-                                @foreach($data as $datum)
+                                @foreach($tasks as $datum)
 
                                     <tr>
                                         <td>{{$datum->title}}</td>

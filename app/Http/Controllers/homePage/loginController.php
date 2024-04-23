@@ -47,7 +47,14 @@ class loginController extends Controller
             // Kullanıcı başarılı bir şekilde giriş yaptıysa
 
             $data = Task::orderBy('id')->get();
-            return view("todoListPageDirectory.todoList",compact('data'));
+            $tasks = [];
+
+            foreach ($data as $datum){
+                if($datum->user_id == Auth::user()->id){
+                    $tasks[] = $datum;
+                }
+            }
+            return view("todoListPageDirectory.todoList",compact('tasks'));
         } else {
             // Kullanıcı giriş yapamadıysa, hata mesajı gösterebilirsiniz veya giriş sayfasına geri yönlendirebilirsiniz.
             return view("loginPanel.login")->with('error', 'Kullanıcı adı veya şifre hatalı');

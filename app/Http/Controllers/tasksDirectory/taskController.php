@@ -33,9 +33,41 @@ class taskController extends Controller
     public function todoList()
     {
         $data = Task::orderBy('id')->get();
-        return view("todoListPageDirectory.todoList",compact("data"));
+        $tasks = [];
 
+        foreach ($data as $datum){
+            if($datum->user_id == Auth::user()->id){
+                $tasks[] = $datum;
+            }
+        }
+
+        return view("todoListPageDirectory.todoList", compact("tasks"));
     }
+
+
+//    public function todoList()
+//    {
+//
+//
+//        $data = Task::orderBy('id')->get();
+//        $tasks = [];
+//
+//        foreach ($data as $datum){
+//
+//
+//            if($datum->user_id == Auth::user()->id){
+//
+//                 $tasks[] = $datum;
+//
+//
+//
+//                   return view("todoListPageDirectory.todoList",compact("data"));
+//
+//            }
+//
+//        }
+//
+//    }
 
     /**
      * Show the form for creating a new resource.
